@@ -23,7 +23,6 @@ var tumblr = new Tumblr(
 );
 
 
-
 app.configure(function(){
   app.use(express.bodyParser());
   app.use(app.router);
@@ -39,7 +38,7 @@ console.log('Cant Tweet This server started on port '+port);
 //add a post
 app.post('*', function(req, res){
   var message = req.body.message;
-  tumblr.post('/post', {type: 'text', title: 'Anonymous', body: '<h3>'+message+'</h3>', tweet:'hello world'}, function(json){
+  tumblr.post('/post', {type: 'text', title: 'Anonymous', body: message, tweet:message}, function(json){
     //console.log(json);
     console.log(message);
     res.status = 201;
