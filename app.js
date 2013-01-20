@@ -16,8 +16,8 @@ var TUMBLR_ACCESS_SECRET = 'uqcKQwfLEVCSbENpe0JGOKulEOMxjZRPT1zH4u3ePizITN0748';
 //get from https://dev.twitter.com/apps/
 var TWITTER_CONSUMER_KEY = 'xx1DZF6oOb8EhSqebXAbA';
 var TWITTER_CONSUMER_SECRET = 'ZoqeJIqnGKEz7m6Yi0L7eCRuQBMzUGB9dg52s';
-var TWITTER_ACCESS_TOKEN = '260570157-Pm22FpZgnnHJLr8x6rdGfdA0MuhlXfgtMLDGcrpd';
-var TWITTER_ACCESS_SECRET = 'vydP6mDaWK1cmPehiZA0fp2jzUNsGZqKy0zgQU1cDuA';
+var TWITTER_ACCESS_TOKEN = '260570157-gnOjfWh8ZoxRbHzkcXeOlKy6qgFilgeg72cBKUPa';
+var TWITTER_ACCESS_SECRET = '3spmp7W58bnj5gLzayF4Bh5QXOjTzKKPqb9Sd8OUFE';
 
 
 var tumblr = new Tumblr({
@@ -52,6 +52,10 @@ app.post('*', function(req, res){
   var message = req.body.message;
   twit.post('statuses/update', { status: message}, function(err, reply) {
     //successful tweet
+    if(err) {
+      res.status = 501;
+      res.send(err);
+    }
     console.log('tweeted: '+message);
     tumblr.post('/post', {type: 'text', title: '', body: message, tweet:message, slug:'none'}, function(json){
       //successful tumblr post
