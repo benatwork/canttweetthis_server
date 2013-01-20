@@ -31,7 +31,7 @@ app.configure(function(){
 });
 
 //start server
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 app.listen(port);
 console.log('Cant Tweet This server started on port '+port);
 
@@ -43,7 +43,7 @@ app.post('*', function(req, res){
     //console.log(json);
     console.log(message);
     res.status = 201;
-    res.end();
+    res.redirect('http://canttweetthis.tumblr.com');
   });
 });
 
