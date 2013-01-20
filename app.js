@@ -54,7 +54,7 @@ app.post('*', function(req, res){
     //successful tweet
     if(err) {
       res.status = 501;
-      res.send(err);
+      res.redirect('http://canttweetthis.tumblr.com');
     }
     console.log('tweeted: '+message);
     tumblr.post('/post', {type: 'text', title: 'Anonymous', body: message, tweet:message, slug:'none'}, function(json){
