@@ -57,7 +57,7 @@ app.post('*', function(req, res){
       res.send(err);
     }
     console.log('tweeted: '+message);
-    tumblr.post('/post', {type: 'text', title: '', body: message, tweet:message, slug:'none'}, function(json){
+    tumblr.post('/post', {type: 'text', title: 'Anonymous', body: message, tweet:message, slug:'none'}, function(json){
       //successful tumblr post
       console.log('posted to tumblr: '+message);
       res.status = 201;
