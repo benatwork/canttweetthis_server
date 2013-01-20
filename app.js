@@ -31,7 +31,8 @@ app.configure(function(){
 });
 
 //start server
-app.listen(3001);
+var port = process.env.PORT || 3000;
+app.listen(port);
 console.log('Cant Tweet This server started on port 3001');
 
 
