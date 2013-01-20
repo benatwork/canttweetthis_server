@@ -33,7 +33,7 @@ app.configure(function(){
 //start server
 var port = process.env.PORT || 3000;
 app.listen(port);
-console.log('Cant Tweet This server started on port 3001');
+console.log('Cant Tweet This server started on port '+port);
 
 
 //add a post
