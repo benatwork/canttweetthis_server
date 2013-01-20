@@ -1,0 +1,13 @@
+{
+  "name": "canttweetthis",
+  "version": "0.0.1",
+  "dependencies": {
+    "tumblrwks": "0.1.1",
+    "express": "3.0.0rc4",
+    "passport": "0.1.15"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
