@@ -53,14 +53,15 @@ app.post('*', function(req, res){
   twit.post('statuses/update', { status: message}, function(err, reply) {
     //successful tweet
     if(err) {
-      res.status = 501;
+      //res.status = 501;
       res.redirect('http://canttweetthis.tumblr.com');
+      return;
     }
     console.log('tweeted: '+message);
     tumblr.post('/post', {type: 'text', title: 'Anonymous', body: message, tweet:message, slug:'none'}, function(json){
       //successful tumblr post
       console.log('posted to tumblr: '+message);
-      res.status = 201;
+      //res.status = 201;
       res.redirect('http://canttweetthis.tumblr.com');
     });
   });
