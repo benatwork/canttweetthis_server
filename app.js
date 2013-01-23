@@ -57,7 +57,7 @@ app.post('*', function(req, res){
     res.redirect('https://twitter.com/helmuthanson');
     if(err) {
       //res.status = 501;
-
+      console.log('twitter error:'+message);
       console.log(err);
       //res.redirect('https://twitter.com/helmuthanson');
       return;
