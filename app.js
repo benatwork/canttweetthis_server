@@ -54,6 +54,7 @@ app.post('*', function(req, res){
     //successful tweet
     if(err) {
       //res.status = 501;
+      console.log(err);
       res.redirect('http://canttweetthis.tumblr.com');
       return;
     }

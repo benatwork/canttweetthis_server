@@ -33,7 +33,7 @@ passport.use(new TumblrStrategy({
   },
   function(token, tokenSecret, profile, done) {
     // asynchronous verification, for effect...
-    console.log(token,tokenSecret);
+    console.log('access token:'+token+' access secret:'+tokenSecret);
     process.nextTick(function () {
       
       // To keep the example simple, the user's Tumblr profile is returned to
