@@ -4,8 +4,8 @@ var express = require('express'),
     TumblrStrategy = require('passport-tumblr').Strategy;
 
 
-var TUMBLR_CONSUMER_KEY = 'fjKpCsip0uxZNLPpdbc9qXxl6AQTAaZalD56PdoInaHRcFggTY';
-var TUMBLR_SECRET_KEY = 'RgTSXMYajWb1r7IXerabCodnPY4LeX62KBDPdGcwnu0AscXCLr';
+var TUMBLR_CONSUMER_KEY = 'Et2DqKUfeyHZfcWkeO97DWiFuRUTceR4qzXRU2Blt1hWTY5Rmg';
+var TUMBLR_SECRET_KEY = 'UN799uft9FONMG1JyP7OSv1c8dd7FzCCetZsRbeCr8qoYfK7Om';
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,

@@ -10,8 +10,8 @@ var express = require("express"),
 //use  get_token.js app to find access token and access secret
 var TUMBLR_CONSUMER_KEY = 'fjKpCsip0uxZNLPpdbc9qXxl6AQTAaZalD56PdoInaHRcFggTY';
 var TUMBLR_CONSUMER_SECRET = 'RgTSXMYajWb1r7IXerabCodnPY4LeX62KBDPdGcwnu0AscXCLr';
-var TUMBLR_ACCESS_TOKEN = '2j2q3nQNoO6EA9fwgzDMKDDa6YwONwJIKsOS9QfPxiKvhDGmcs';
-var TUMBLR_ACCESS_SECRET = 'uqcKQwfLEVCSbENpe0JGOKulEOMxjZRPT1zH4u3ePizITN0748';
+var TUMBLR_ACCESS_TOKEN = 'hkFkBpjp4QXcWcEcOb3gRPZrMW3gnrWqxDxM9RCymEUJiDfGgF';
+var TUMBLR_ACCESS_SECRET = '9mwQ3JOTH3qmb6ZXeZcuppoLNtgRuhYkSXj7B4zd4myN5qc3iH';
 
 //get from https://dev.twitter.com/apps/
 var TWITTER_CONSUMER_KEY = 'xx1DZF6oOb8EhSqebXAbA';
