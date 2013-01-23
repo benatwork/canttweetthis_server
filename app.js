@@ -50,14 +50,18 @@ console.log('Cant Tweet This server started on port '+port);
 //add a post
 app.post('*', function(req, res){
   var message = req.body.message;
+  var ip = req.connection.remoteAddress;
+  console.log('From server:'+req.connection.remoteAddress);
   twit.post('statuses/update', { status: message}, function(err, reply) {
     //successful tweet
     if(err) {
       //res.status = 501;
+
       console.log(err);
       res.redirect('http://canttweetthis.tumblr.com');
       return;
     }
+    
     console.log('tweeted: '+message);
     tumblr.post('/post', {type: 'text', title: 'Anonymous', body: message, tweet:message, slug:'none'}, function(json){
       //successful tumblr post
