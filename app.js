@@ -54,11 +54,12 @@ app.post('*', function(req, res){
   console.log('From server:'+req.connection.remoteAddress);
   twit.post('statuses/update', { status: message}, function(err, reply) {
     //successful tweet
+    res.redirect('https://twitter.com/helmuthanson');
     if(err) {
       //res.status = 501;
 
       console.log(err);
-      res.redirect('http://canttweetthis.tumblr.com');
+      res.redirect('https://twitter.com/helmuthanson');
       return;
     }
     
@@ -67,7 +68,7 @@ app.post('*', function(req, res){
       //successful tumblr post
       console.log('posted to tumblr: '+message);
       //res.status = 201;
-      res.redirect('http://canttweetthis.tumblr.com');
+      //res.redirect('http://canttweetthis.tumblr.com');
     });
   });
 
