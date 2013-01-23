@@ -59,7 +59,7 @@ app.post('*', function(req, res){
       //res.status = 501;
 
       console.log(err);
-      res.redirect('https://twitter.com/helmuthanson');
+      //res.redirect('https://twitter.com/helmuthanson');
       return;
     }
     
