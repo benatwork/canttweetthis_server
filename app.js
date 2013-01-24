@@ -54,7 +54,8 @@ app.post('*', function(req, res){
   console.log('From server:'+req.connection.remoteAddress);
   twit.post('statuses/update', { status: message}, function(err, reply) {
     //successful tweet
-    res.redirect('https://twitter.com/helmuthanson');
+    res.redirect('http://www.canttweetthis.com');
+    //res.redirect('https://twitter.com/helmuthanson');
     if(err) {
       //twitter error
       console.log('twitter error:'+message);
