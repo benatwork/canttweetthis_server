@@ -47,28 +47,27 @@ app.listen(port);
 console.log('Cant Tweet This server started on port '+port);
 
 
-//add a post
+//post route
 app.post('*', function(req, res){
   var message = req.body.message;
   var ip = req.connection.remoteAddress;
   console.log('From server:'+req.connection.remoteAddress);
   twit.post('statuses/update', { status: message}, function(err, reply) {
     //successful tweet
-    res.redirect('https://twitter.com/helmuthanson');
+    //res.redirect('https://twitter.com/helmuthanson');
+    res.redirect('/');
     if(err) {
-      //res.status = 501;
+      //twitter error
       console.log('twitter error:'+message);
       console.log(err);
-      //res.redirect('https://twitter.com/helmuthanson');
       return;
     }
-    
     console.log('tweeted: '+message);
     tumblr.post('/post', {type: 'text', title: 'Anonymous', body: message, tweet:message, slug:'none'}, function(json){
       //successful tumblr post
+      
       console.log('posted to tumblr: '+message);
-      //res.status = 201;
-      //res.redirect('http://canttweetthis.tumblr.com');
+      
     });
   });
 
