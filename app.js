@@ -75,7 +75,6 @@ app.post('*', function(req, res){
       return;
     }
     console.log('Server:'+req.connection.remoteAddress+' Tweeted:'+message);
-    res.status = 200;
     res.json(200,{success:reply});
     //res.send('success',{success:message});
   });
