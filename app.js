@@ -63,22 +63,20 @@ app.post('*', function(req, res){
   console.log('incoming',message);
   if(message.match('@')){
     console.log('found a @');
-    res.status = 403;
-    res.send('error',{error:'found a @'});
+    res.json(403,{error:'found a @'});
     return;
   }
   
   twit.post('statuses/update', { status: message}, function(err, reply) {
     if(err) {
       console.log(err.statusCode);
-      res.status = err.statusCode;
-      res.send('error', { error: err });
+      res.json(err.statusCode,{error:err});
       console.log('twitter error:'+message);
       return;
     }
     console.log('Server:'+req.connection.remoteAddress+' Tweeted:'+message);
     res.status = 200;
-    res.end();
+    res.json(200,{success:reply});
     //res.send('success',{success:message});
   });
 });
