@@ -23,10 +23,17 @@ var allowCrossDomain = function(req, res, next) {
 
 
 //get from https://dev.twitter.com/apps/
-var TWITTER_CONSUMER_KEY = 'xx1DZF6oOb8EhSqebXAbA';
-var TWITTER_CONSUMER_SECRET = 'ZoqeJIqnGKEz7m6Yi0L7eCRuQBMzUGB9dg52s';
-var TWITTER_ACCESS_TOKEN = '260570157-gnOjfWh8ZoxRbHzkcXeOlKy6qgFilgeg72cBKUPa';
-var TWITTER_ACCESS_SECRET = '3spmp7W58bnj5gLzayF4Bh5QXOjTzKKPqb9Sd8OUFE';
+// var TWITTER_CONSUMER_KEY = 'xx1DZF6oOb8EhSqebXAbA';
+// var TWITTER_CONSUMER_SECRET = 'ZoqeJIqnGKEz7m6Yi0L7eCRuQBMzUGB9dg52s';
+// var TWITTER_ACCESS_TOKEN = '260570157-gnOjfWh8ZoxRbHzkcXeOlKy6qgFilgeg72cBKUPa';
+// var TWITTER_ACCESS_SECRET = '3spmp7W58bnj5gLzayF4Bh5QXOjTzKKPqb9Sd8OUFE';
+
+var TWITTER_CONSUMER_KEY = 'SZbwUoDSRaEWlBMXOxFlw';
+var TWITTER_CONSUMER_SECRET = 'Fa02nREYLhpuu2cA3T6VXrX3tf7M8Pgg3XExgAW5L4s';
+var TWITTER_ACCESS_TOKEN = '1134483806-ZoVCSTyrmjNENH8rzSTYw1B2J2SfUtwFlbw1NOP';
+var TWITTER_ACCESS_SECRET = 'CyOYlGd1jNRwEQ40nwbq90u3dyVDe5Gzbx0rwywpZw';
+
+
 
 var twit = new Twit({
   consumer_key: TWITTER_CONSUMER_KEY,
