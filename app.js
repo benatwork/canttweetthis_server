@@ -60,7 +60,7 @@ app.post('*', function(req, res){
   var message = req.body.message;
   var ip = req.connection.remoteAddress;
 
-
+  console.log('incoming',message);
   if(message.match('@')){
     res.status = 403;
     res.send('error',{error:'found a @'});
