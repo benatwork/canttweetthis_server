@@ -1,32 +1,32 @@
 var express = require("express"),
   app = express(),
   passport = require('passport'),
-  Tumblr = require('tumblrwks'),
   Twit = require('twit');
   //TumblrStrategy = require('passport-tumblr').Strategy;
 
 
-//twitter data
-//use  get_token.js app to find access token and access secret
-var TUMBLR_CONSUMER_KEY = 'fjKpCsip0uxZNLPpdbc9qXxl6AQTAaZalD56PdoInaHRcFggTY';
-var TUMBLR_CONSUMER_SECRET = 'RgTSXMYajWb1r7IXerabCodnPY4LeX62KBDPdGcwnu0AscXCLr';
-var TUMBLR_ACCESS_TOKEN = 'hkFkBpjp4QXcWcEcOb3gRPZrMW3gnrWqxDxM9RCymEUJiDfGgF';
-var TUMBLR_ACCESS_SECRET = '9mwQ3JOTH3qmb6ZXeZcuppoLNtgRuhYkSXj7B4zd4myN5qc3iH';
+var allowCrossDomain = function(req, res, next) {
+
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    //res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+    res.header("Access-Control-Allow-Headers", "origin, x-requested-with, content-type");
+     // intercept OPTIONS method
+
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    } else{
+      next();
+    }
+};
+
 
 //get from https://dev.twitter.com/apps/
 var TWITTER_CONSUMER_KEY = 'xx1DZF6oOb8EhSqebXAbA';
 var TWITTER_CONSUMER_SECRET = 'ZoqeJIqnGKEz7m6Yi0L7eCRuQBMzUGB9dg52s';
 var TWITTER_ACCESS_TOKEN = '260570157-gnOjfWh8ZoxRbHzkcXeOlKy6qgFilgeg72cBKUPa';
 var TWITTER_ACCESS_SECRET = '3spmp7W58bnj5gLzayF4Bh5QXOjTzKKPqb9Sd8OUFE';
-
-
-var tumblr = new Tumblr({
-    consumerKey: TUMBLR_CONSUMER_KEY,
-    consumerSecret: TUMBLR_CONSUMER_SECRET,
-    accessToken: TUMBLR_ACCESS_TOKEN,
-    accessSecret: TUMBLR_ACCESS_SECRET
-  }, "canttweetthis.tumblr.com"
-);
 
 var twit = new Twit({
   consumer_key: TWITTER_CONSUMER_KEY,
@@ -36,6 +36,7 @@ var twit = new Twit({
 });
 
 app.configure(function(){
+  app.use(allowCrossDomain);
   app.use(express.bodyParser());
   app.use(app.router);
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
@@ -51,24 +52,47 @@ console.log('Cant Tweet This server started on port '+port);
 app.post('*', function(req, res){
   var message = req.body.message;
   var ip = req.connection.remoteAddress;
-  console.log('From server:'+req.connection.remoteAddress);
+
+
+  if(message.match('@')){
+    res.status = 403;
+    res.send('error',{error:'found a @'});
+    return;
+  }
+  
   twit.post('statuses/update', { status: message}, function(err, reply) {
-    //successful tweet
-    res.redirect('http://www.canttweetthis.com');
-    //res.redirect('https://twitter.com/helmuthanson');
     if(err) {
-      //twitter error
+      console.log(err.statusCode);
+      res.status = err.statusCode;
+      res.send('error', { error: err });
       console.log('twitter error:'+message);
-      console.log(err);
       return;
     }
-    console.log('tweeted: '+message);
-    tumblr.post('/post', {type: 'text', title: 'Anonymous', body: message, tweet:message, slug:'none'}, function(json){
-      //successful tumblr post
-      console.log('posted to tumblr: '+message);
-      
-    });
+    console.log('Server:'+req.connection.remoteAddress+' Tweeted:'+message);
+    res.status = 200;
+    res.end();
+    //res.send('success',{success:message});
   });
+});
 
+
+
+
+//gets
+app.get('/followers',function(req,res){
+  twit.get('followers/ids', { screen_name: 'canttweetthis_' },  function (err, reply) {
+      res.send(reply);
+  });
+});
+
+app.get('/tweets',function(req,res){
+  twit.get('statuses/user_timeline', { screen_name: 'canttweetthis_', trim_user:true,count:200 },  function (err, reply) {
+    if(err) console.log(err);
+    var messages = [];
+    for (var i = 0; i < reply.length; i++) {
+      messages.push(reply[i].text);
+    }
+    res.send(messages);
+  });
 });
 
