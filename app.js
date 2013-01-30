@@ -62,6 +62,7 @@ app.post('*', function(req, res){
 
   console.log('incoming',message);
   if(message.match('@')){
+    console.log('found a @');
     res.status = 403;
     res.send('error',{error:'found a @'});
     return;
